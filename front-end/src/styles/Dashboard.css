@@ -1,0 +1,16 @@
+.dashboard {
+  display: flex;
+  background-color: #444654;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.dashboard nav {
+  width: 250px; /* adjust this as needed */
+  height: 100%;
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  overflow-y: auto;
+}
