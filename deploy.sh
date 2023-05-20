@@ -9,8 +9,14 @@ fi
 # Create the lock file
 touch deploy.lock
 
+# Fetch the latest changes from the master branch
+git fetch origin master
+
+# Reset the code to the latest commit on the master branch
+git reset --hard origin/master
+
 # Move to the backend directory
-cd back-end
+cd ../back-end
 
 # Install dependencies if node_modules doesn't exist or package-lock.json has changed
 if [ ! -d "node_modules" ] || [ "$(git diff --name-only HEAD~1 package-lock.json)" != "" ]; then
