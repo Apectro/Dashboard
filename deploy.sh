@@ -12,8 +12,8 @@ touch deploy.lock
 # Move to the backend directory
 cd back-end
 
-# Install dependencies if package-lock.json has changed
-if [ "$(git diff --name-only HEAD~1 package-lock.json)" != "" ]; then
+# Install dependencies if node_modules doesn't exist or package-lock.json has changed
+if [ ! -d "node_modules" ] || [ "$(git diff --name-only HEAD~1 package-lock.json)" != "" ]; then
   npm ci
 else
   echo "Skipping npm install for backend"
@@ -28,8 +28,8 @@ node dist/index.js &
 # Move to the frontend directory
 cd ../front-end
 
-# Install dependencies if package-lock.json has changed
-if [ "$(git diff --name-only HEAD~1 package-lock.json)" != "" ]; then
+# Install dependencies if node_modules doesn't exist or package-lock.json has changed
+if [ ! -d "node_modules" ] || [ "$(git diff --name-only HEAD~1 package-lock.json)" != "" ]; then
   npm ci
 else
   echo "Skipping npm install for frontend"
