@@ -12,8 +12,12 @@ touch deploy.lock
 # Move to the backend directory
 cd back-end
 
-# Install dependencies
-npm install
+# Install dependencies if package-lock.json has changed
+if [ "$(git diff --name-only HEAD~1 package-lock.json)" != "" ]; then
+  npm ci
+else
+  echo "Skipping npm install for backend"
+fi
 
 # Build the backend
 tsc
@@ -24,8 +28,12 @@ node dist/index.js &
 # Move to the frontend directory
 cd ../front-end
 
-# Install dependencies
-npm install
+# Install dependencies if package-lock.json has changed
+if [ "$(git diff --name-only HEAD~1 package-lock.json)" != "" ]; then
+  npm ci
+else
+  echo "Skipping npm install for frontend"
+fi
 
 # Start the frontend development server
 npm start
