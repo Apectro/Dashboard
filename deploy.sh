@@ -2,12 +2,21 @@
 
 # Check if the lock file exists
 if [ -f deploy.lock ]; then
-  echo "Deployment is already in progress. Exiting..."
-  exit 0
+  echo "Deployment is already in progress. Checking if it's active..."
+
+  # Check if the previous deployment is still running
+  previous_pid=$(cat deploy.lock)
+  if ps -p "$previous_pid" > /dev/null; then
+    echo "Previous deployment is still active. Exiting..."
+    exit 0
+  else
+    echo "Previous deployment is not active. Cleaning up the lock file..."
+    rm deploy.lock
+  fi
 fi
 
 # Create the lock file
-touch deploy.lock
+echo "$$" > deploy.lock
 
 # Function to shut down running processes
 shutdown_processes() {
