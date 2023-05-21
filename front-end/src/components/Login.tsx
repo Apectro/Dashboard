@@ -33,7 +33,7 @@ const Login: React.FC<LoginProps> = ({ setToken, setIsAdmin }) => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <h2 className={styles.maintitle}>
           <h2 className={styles.secondarytitle}>WELCOME BACK</h2>
-          <h2 className={styles.title}>Log into your account</h2>
+          <h2 className={styles.title}>Log into your accountttttt</h2>
         </h2>
         {error && <div className={styles.error}>{error}</div>}
         <div>
