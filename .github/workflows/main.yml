@@ -13,9 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Update repository
-        run: git pull origin master
-
       - name: Run shell script
         env:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
@@ -23,4 +20,5 @@ jobs:
           REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
         run: |
           cd ${{ github.workspace }}
+          git pull origin master
           ./deploy.sh

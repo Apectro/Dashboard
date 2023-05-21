@@ -9,8 +9,6 @@ fi
 # Create the lock file
 touch deploy.lock
 
-git pull origin master
-
 # Move to the backend directory
 cd back-end
 
